@@ -10,5 +10,13 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+* {
+  box-sizing: border-box; //the height of the element doesn't change with the height of the padding or border. the asterisk targets everything
+}
 
 //react app transforms scss to css so the browser can read it
