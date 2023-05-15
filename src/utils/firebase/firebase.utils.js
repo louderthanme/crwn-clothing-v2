@@ -5,6 +5,12 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
 } from 'firebase/auth'
+import {
+    getFirestore, // to initialize
+    doc, // needed for actual doc instance
+    getDoc, //getting docs data
+    setDoc //setting docs data
+} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: "AIzaSyDNKqXQUHGTw-ez_4cL-T6ejirrYeYEDcI",
@@ -25,3 +31,13 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+
+export const db = getFirestore() // Initializing database
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+    const userDocRef = doc(db, 'users', userAuth.uid)  //database, collectionName, uid to connect it to the response we get from signInWithGooglePopup(); in our sign in page.
+
+    console.log(userDocRef)
+    const userSnapshot = await getDoc(userDocRef);
+    console.log(userSnapshot.exists())
+}

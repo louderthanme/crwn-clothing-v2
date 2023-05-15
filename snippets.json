@@ -1,0 +1,22 @@
+{
+    "shoes": {
+        "nikeAirMax": {
+            "name": "Air Max",
+            "brand": "Nike",
+            "imageUrl": "www.url.com",
+            "cost": {
+                "price": 150,
+                "currency": "USD"
+            }
+        },
+        "AdidasNMD": {
+            "name": "NMD",
+            "brand": "Adidas",
+            "imageUrl": "www.url.com",
+            "cost": {
+                "price": 1510,
+                "currency": "USD"
+            }
+        }
+    }
+}
