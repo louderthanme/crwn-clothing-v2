@@ -1,10 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import {
-    getAuth,
-    signInWithRedirect,
-    signInWithPopup,
-    GoogleAuthProvider,
-} from 'firebase/auth'
+import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, } from 'firebase/auth'
 import {
     getFirestore, // to initialize
     doc, // needed for actual doc instance
@@ -22,13 +17,10 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-
 const provider = new GoogleAuthProvider();//needs new because it's essentially a class we get from google firebase authentication
-
 provider.setCustomParameters({
     prompt: "select_account"
 })
-
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
 
@@ -37,7 +29,21 @@ export const db = getFirestore() // Initializing database
 export const createUserDocumentFromAuth = async (userAuth) => {
     const userDocRef = doc(db, 'users', userAuth.uid)  //database, collectionName, uid to connect it to the response we get from signInWithGooglePopup(); in our sign in page.
 
-    console.log(userDocRef)
+    console.log(userDocRef)  // the user snapshot comes from the docRef
     const userSnapshot = await getDoc(userDocRef);
     console.log(userSnapshot.exists())
+    if (!userSnapshot.exists()) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date(); // to know when they signed in.
+        try {
+            await setDoc(userDocRef, {
+                displayName,
+                email,
+                createdAt
+            })
+        } catch (e) {
+            console.log('error creating user', e.message)
+        }
+    }
+    return userDocRef
 }
