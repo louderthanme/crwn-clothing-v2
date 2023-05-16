@@ -17,12 +17,13 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const provider = new GoogleAuthProvider();//needs new because it's essentially a class we get from google firebase authentication
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();//needs new because it's essentially a class we get from google firebase authentication
+googleProvider.setCustomParameters({
     prompt: "select_account"
 })
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
 export const db = getFirestore() // Initializing database
 
@@ -32,6 +33,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     console.log(userDocRef)  // the user snapshot comes from the docRef
     const userSnapshot = await getDoc(userDocRef);
     console.log(userSnapshot.exists())
+
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date(); // to know when they signed in.
