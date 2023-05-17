@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth'
 import {
     getFirestore, // to initialize
     doc, // needed for actual doc instance
@@ -23,16 +23,19 @@ googleProvider.setCustomParameters({
 })
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
 export const db = getFirestore() // Initializing database
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+    if (!userAuth) return;
+
     const userDocRef = doc(db, 'users', userAuth.uid)  //database, collectionName, uid to connect it to the response we get from signInWithGooglePopup(); in our sign in page.
 
-    console.log(userDocRef)  // the user snapshot comes from the docRef
+
+
+    // console.log(userDocRef)  // the user snapshot comes from the docRef
     const userSnapshot = await getDoc(userDocRef);
-    console.log(userSnapshot.exists())
+    // console.log(userSnapshot.exists())
 
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
@@ -41,11 +44,17 @@ export const createUserDocumentFromAuth = async (userAuth) => {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalInformation
             })
         } catch (e) {
             console.log('error creating user', e.message)
         }
     }
     return userDocRef
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+    return await createUserWithEmailAndPassword(auth, email, password)
 }
