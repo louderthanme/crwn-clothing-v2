@@ -28,15 +28,8 @@ export const db = getFirestore() // Initializing database
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
     if (!userAuth) return;
-
     const userDocRef = doc(db, 'users', userAuth.uid)  //database, collectionName, uid to connect it to the response we get from signInWithGooglePopup(); in our sign in page.
-
-
-
-    // console.log(userDocRef)  // the user snapshot comes from the docRef
     const userSnapshot = await getDoc(userDocRef);
-    // console.log(userSnapshot.exists())
-
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date(); // to know when they signed in.
@@ -58,3 +51,4 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password)
 }
+

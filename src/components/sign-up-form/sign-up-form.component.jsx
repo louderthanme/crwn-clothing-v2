@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils'
+import FormInput from '../form-input/form-input.component'
+import Button from '../button/button.component'
+import './sign-up-form.styles.scss'
 
 const defaultFormFields = {
     displayName: '',
@@ -42,38 +45,35 @@ const SignUpForm = () => {
     };
 
     return (
-        <div>
-            <h1>i'm the sign up form</h1>
+        <div className='sign-up-container'>
             {/* on submit comes from react */}
+            <h2> Don't have an account?</h2>
+            <span> Sign up with your email and password </span>
             <form onSubmit={handleSubmit}>
-
-                <label htmlFor="">Display Name</label>
-                <input
+                <FormInput
+                    label='Display Name'
                     onChange={handleChange}
                     name="displayName"
                     type="text"
                     value={displayName}
                     required
                 />
-
-                <label htmlFor="">Email</label>
-                <input onChange={handleChange}
+                <FormInput onChange={handleChange}
+                    label='Email'
                     name="email"
                     type="email"
                     value={email}
                     required
                 />
-
-                <label htmlFor="">Password</label>
-                <input onChange={handleChange}
+                <FormInput onChange={handleChange}
+                    label='Password'
                     name="password"
                     value={password}
                     type="password"
                     required
                 />
-
-                <label htmlFor="">Confirm Password</label>
-                <input
+                <FormInput
+                    label='Confirm Password'
                     onChange={handleChange}
                     name="confirmPassword"
                     value={confirmPassword}
@@ -81,7 +81,7 @@ const SignUpForm = () => {
                     required
                 />
 
-                <button type="submit"> Sign Up</button>
+                <Button buttonType='google' type="submit"> Sign Up</Button>
             </form>
 
         </div>
