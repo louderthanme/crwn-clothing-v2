@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 import { UserProvider } from './context/user.context';
+import { ProductsProvider } from './context/products.context';
 
 import './index.scss';
 
@@ -19,8 +20,13 @@ root.render(
     <BrowserRouter>
       {/* Wrap the application with the UserProvider to provide user-related data and functions */}
       <UserProvider>
-        {/* The main component representing the entire application */}
-        <App />
+
+        {/* Wrap the application with the ProductProvider to provide product-data and functions, being the children of the userprovider allows the product to access info from users.  */}
+        <ProductsProvider>
+
+          {/* The main component representing the entire application */}
+          <App />
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
