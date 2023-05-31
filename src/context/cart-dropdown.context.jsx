@@ -2,8 +2,12 @@ import { createContext, useState, useEffect } from 'react';
 import PRODUCTS from '../shop_data.json'
 
 // Create the user context with default values
-export const ProductsContext = createContext({
+export const cartDropdownContext = createContext({
     products: [],
+    "id": null,
+    "name": null,
+    "imageUrl": null,
+    "price": null,
     setProduct: () => null,
 });
 
@@ -18,6 +22,6 @@ export const ProductsProvider = ({ children }) => {
 
     return (
         // Provide the user context value to the wrapped components
-        <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
+        <cartDropdownContext.Provider value={value}>{children}</cartDropdownContext.Provider>
     );
 };
