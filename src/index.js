@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import { UserProvider } from './context/user.context';
 import { ProductsProvider } from './context/products.context';
+import { CartProvider } from './context/cart.context';
 
 import './index.scss';
 
@@ -25,7 +26,12 @@ root.render(
         <ProductsProvider>
 
           {/* The main component representing the entire application */}
-          <App />
+          <CartProvider>
+            <App />
+
+          </CartProvider>
+
+
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
@@ -34,3 +40,5 @@ root.render(
 
 // Report web vitals and performance metrics
 reportWebVitals();
+
+

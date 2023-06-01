@@ -9,7 +9,7 @@ export const ProductsContext = createContext({
 
 // UserProvider component with user state management
 export const ProductsProvider = ({ children }) => {
-    const [products, setProducts] = useState(PRODUCTS);
+    const [products] = useState(PRODUCTS);
     const value = { products };
 
     useEffect(() => {
