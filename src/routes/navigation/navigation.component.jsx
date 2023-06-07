@@ -4,6 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
+
 import { UserContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
@@ -27,7 +28,6 @@ const Navigation = () => {
                     <Link className="nav-link" to="/shop">
                         SHOP
                     </Link>
-
                     {
                         currentUser ? (
                             <span className="nav-link" onClick={signOutUser}>SIGN OUT</span>
@@ -37,7 +37,9 @@ const Navigation = () => {
                             </Link>
                         )
                     }
-
+                    <Link className="nav-link" to="/checkout">
+                        `CHECKOUT`
+                    </Link>
                     <CartIcon />
 
                     {/* Conditionally render the CartDropdown component based on the isCartOpen value */}
