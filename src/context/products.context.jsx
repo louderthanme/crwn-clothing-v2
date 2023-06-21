@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
-import PRODUCTS from '../shop_data.json'
+import { addCollectionAndDocuments } from '../utils/firebase/firebase.utils.js';
+
+import SHOP_DATA from '../shop_data.js'
 
 // Create the user context with default values
 export const ProductsContext = createContext({
@@ -9,12 +11,13 @@ export const ProductsContext = createContext({
 
 // UserProvider component with user state management
 export const ProductsProvider = ({ children }) => {
-    const [products] = useState(PRODUCTS);
+    const [products] = useState([]);
     const value = { products };
 
-    useEffect(() => {
-
-    }, [])
+    // the code below should be run only when I want to update the database.
+    // useEffect(() => {
+    //     addCollectionAndDocuments('categories', SHOP_DATA)
+    // }, [])
 
     return (
         // Provide the user context value to the wrapped components
