@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 import { UserProvider } from './context/user.context';
-import { ProductsProvider } from './context/products.context';
+import { CategoriesProvider } from './context/categories.context';
 import { CartProvider } from './context/cart.context';
 
 import './index.scss';
@@ -23,7 +23,7 @@ root.render(
       <UserProvider>
 
         {/* Wrap the application with the ProductProvider to provide product-data and functions, being the children of the userprovider allows the product to access info from users.  */}
-        <ProductsProvider>
+        <CategoriesProvider>
 
           {/* The main component representing the entire application */}
           <CartProvider>
@@ -32,7 +32,7 @@ root.render(
           </CartProvider>
 
 
-        </ProductsProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

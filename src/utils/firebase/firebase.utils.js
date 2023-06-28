@@ -15,16 +15,18 @@ import {
     setDoc,
     collection,
     writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore';
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "<your-api-key>",
-    authDomain: "<your-auth-domain>",
-    projectId: "<your-project-id>",
-    storageBucket: "<your-storage-bucket>",
-    messagingSenderId: "<your-messaging-sender-id>",
-    appId: "<your-app-id>",
+    apiKey: "AIzaSyDNKqXQUHGTw-ez_4cL-T6ejirrYeYEDcI",
+    authDomain: "clothing-store-572ee.firebaseapp.com",
+    projectId: "clothing-store-572ee",
+    storageBucket: "clothing-store-572ee.appspot.com",
+    messagingSenderId: "700146097333",
+    appId: "1:700146097333:web:a69084e45693e59b50f2fc"
 };
 
 // Initialize Firebase app
@@ -59,6 +61,23 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     await batch.commit(); // Commit the batch write
     console.log('done');
 };
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef) // this is a snapshottable object now
+
+    const querySnapshot = await getDocs(q); //going to firestore to get snapshot, hence await
+    //querySnapshot.docs //array of individual docs inside, snapshots are the actual data. We wanna reduce over it
+
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+        const { title, items } = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+
+    }, {}); //this last empty object is in itself the initial value for the reduce method. Reducing everything from the snapshops into a usuable object here 
+
+    return categoryMap;
+}
 
 // Create a user document in Firestore based on user authentication data
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {

@@ -12,7 +12,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/*" element={<Shop />} /> {/* Renders the Shop component when the path starts with "/shop/". The asterisk (*) is a wildcard that matches any additional path segments after "/shop/". */}
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/auth" element={<Authentication />} />
       </Route>
