@@ -1,15 +1,29 @@
-import './form-input.styles.scss'
-
-const FormInput = ({ label, ...otherProps }) => {
+import {
+    GroupContainer,
+    FormInputContainer,
+    PasswordInputContainer,
+    FormInputLabel
+  } from './form-input.styles';
+  
+  const FormInput = ({ label, ...otherProps }) => {
+    const { value } = otherProps;
+  
     return (
-        <div className="group">
-            <input className="form-input" {...otherProps} />
-            {label && ( //if there is a label then render, else, don't
-                <label className={`${otherProps.value.length ? 'shrink' : null} form-input-label`}> {label} </label>
-                // if there are other props, then append class 'shrink', if not, add nothing                
-            )}
-        </div >
-    )
-}
-
-export default FormInput
+      <GroupContainer>
+        {otherProps.type === 'password' ? (
+          <PasswordInputContainer {...otherProps} />
+        ) : (
+          <FormInputContainer {...otherProps} />
+        )        }
+        
+        {label && (
+          <FormInputLabel className={`${value.length ? 'shrink' : ''}`}>
+            {label}
+          </FormInputLabel>
+        )}
+      </GroupContainer>
+    );
+  };
+  
+  export default FormInput;
+  

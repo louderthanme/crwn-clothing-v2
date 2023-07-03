@@ -1,25 +1,16 @@
-import './category-preview.styles.scss'
 import ProductCard from '../product-card/product-card.component'
-import { Link } from 'react-router-dom'
+
+import {CategoryPreviewContainer,TitleLink,Preview} from './category-preview.styles'
+
 
 const CategoryPreview = ({ title, products }) => {
 
     return (
-        <div className="category-preview-container">
-
-
-
-
-
-            <h2>
-                <Link className='title' to={title}>
-
-                    {title.toUpperCase()}
-
-
-                </Link>
-            </h2>
-            <div className='preview'>
+        <CategoryPreviewContainer>
+            <TitleLink to={title}>
+                {title.toUpperCase()}
+            </TitleLink>
+            <Preview>
                 {
                     // Filter the products array to select the first 4 items for preview the underscore is convention with developers to indicate it's not necessary for the logic in this case, however, it could be anyother name for that variable that filter requires.
                     products.filter((_, idx) => idx < 4)
@@ -27,8 +18,8 @@ const CategoryPreview = ({ title, products }) => {
                             <ProductCard key={product.id} product={product} />
                         )
                 }
-            </div>
-        </div>
+            </Preview>
+        </CategoryPreviewContainer>
     )
 
 }

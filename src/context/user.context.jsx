@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const value = { currentUser, setCurrentUser };
 
-    signOutUser();  //sign out from the get go so out auth object stops tracking that im signed in
+    // signOutUser();  //sign out from the get go so out auth object stops tracking that im signed in
 
     useEffect(() => {
         const unsubscribe = onAuthStateChangedListener((user) => {

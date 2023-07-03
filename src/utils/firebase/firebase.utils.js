@@ -115,8 +115,12 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 // Sign in user with email and password
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
-    return await signInWithEmailAndPassword(auth, email, password);
-};
+  
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log('Sign-in completed.');
+  
+    return userCredential;
+  };
 
 // Sign out the currently authenticated user
 export const signOutUser = async () => await signOut(auth);
