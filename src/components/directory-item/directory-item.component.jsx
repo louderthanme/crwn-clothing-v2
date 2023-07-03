@@ -1,4 +1,4 @@
-import {DirectoryItemContainer,BackgroundImageContainer,Body} from './directory-item.styles'
+import {DirectoryItemContainer,BackgroundImage,Body} from './directory-item.styles'
 
 
 const DirectoryItem = ({ category }) => {
@@ -7,11 +7,7 @@ const DirectoryItem = ({ category }) => {
     return (
 
         <DirectoryItemContainer>
-            <BackgroundImageContainer
-                style={{
-                    backgroundImage: `url(${imageUrl})`
-                }}
-            />
+            <BackgroundImage imageUrl={imageUrl} />
             <Body>
                 <h2>{title}</h2>
                 <p> shop now</p>
