@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signInWithGooglePopup,  signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
 
 import { ButtonsContainer, SignInContainer} from './sign-in-form.styles';
 
@@ -78,7 +78,7 @@ const SignInForm = () => {
                     {/* Sign In With Google button */}
                     {/* This button is of type "button" because, by default inside a form, the button acts as a submit button */}
                     {/* We don't want the Sign In With Google button to submit the form */}
-                    <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
                         Sign In With Google
                     </Button>
                 </ButtonsContainer>
